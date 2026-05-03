@@ -79,12 +79,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Typing Effect for Role
+    const roleText = document.querySelector('.role');
+    const text = roleText.textContent;
+    roleText.textContent = '';
+    let i = 0;
+
+    function typeWriter() {
+        if (i < text.length) {
+            roleText.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+
+    // Start typing effect after a small delay
+    setTimeout(typeWriter, 1000);
+
     // Fade-in Animation on Scroll
     const faders = document.querySelectorAll('.fade-in');
     
     const appearOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
     };
 
     const appearOnScroll = new IntersectionObserver(function(entries, observer) {

@@ -1,19 +1,19 @@
 /* Base and Reset */
 :root {
-    --primary-color: #ff2d55; /* Vibrant Pink */
-    --secondary-color: #af52de; /* Vibrant Purple */
-    --accent-color: #5856d6; /* Indigo */
-    --info-color: #007aff; /* Bright Blue */
-    --bg-color: #050505; /* Near Black */
+    --primary-color: #00f3ff; /* Neon Cyan */
+    --secondary-color: #ff00ff; /* Neon Pink */
+    --accent-color: #39ff14; /* Neon Green */
+    --info-color: #ffea00; /* Bright Yellow */
+    --bg-color: #000000; /* Pure Black */
     --text-color: #ffffff;
-    --light-text: #a1a1a6;
+    --light-text: #cccccc;
     --white: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-    --shadow-hover: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
-    --gradient-primary: linear-gradient(135deg, #ff2d55 0%, #af52de 100%);
-    --gradient-accent: linear-gradient(135deg, #5856d6 0%, #007aff 100%);
+    --glass-bg: rgba(0, 0, 0, 0.6);
+    --glass-border: rgba(0, 243, 255, 0.3);
+    --shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    --shadow-hover: 0 0 20px rgba(0, 243, 255, 0.6), 0 0 40px rgba(0, 243, 255, 0.3);
+    --gradient-primary: linear-gradient(135deg, #00f3ff 0%, #ff00ff 100%);
+    --gradient-accent: linear-gradient(135deg, #39ff14 0%, #00f3ff 100%);
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -35,7 +35,7 @@ body {
     font-size: 1.1rem;
     overflow-x: hidden;
     position: relative;
-    background: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
+    background: #000000;
 }
 
 /* Background elements for aesthetic */
@@ -47,7 +47,7 @@ body::before {
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 45, 85, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
     z-index: -1;
     pointer-events: none;
 }
@@ -60,7 +60,7 @@ body::after {
     width: 700px;
     height: 700px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(88, 86, 214, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.15) 0%, transparent 70%);
     z-index: -1;
     pointer-events: none;
 }
@@ -91,6 +91,17 @@ h1, h2, h3 {
     left: 50%;
     transform: translateX(-50%);
     letter-spacing: -1px;
+    background: linear-gradient(90deg, var(--white), var(--primary-color), var(--secondary-color), var(--white));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleAppear 1s ease-out forwards, textShimmer 5s linear infinite;
+    transition: var(--transition);
+}
+
+.section-title:hover {
+    transform: translateX(-50%) scale(1.05);
+    text-shadow: 0 0 20px rgba(0, 243, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.5);
 }
 
 .section-title::after {
@@ -103,6 +114,12 @@ h1, h2, h3 {
     height: 6px;
     background: var(--gradient-primary);
     border-radius: 10px;
+    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--secondary-color);
+    transition: width 0.4s ease;
+}
+
+.section-title:hover::after {
+    width: 150px;
 }
 
 /* Navbar */
@@ -264,12 +281,12 @@ h1, h2, h3 {
 .primary-btn {
     background: var(--gradient-primary);
     color: var(--white);
-    box-shadow: 0 10px 20px -5px rgba(255, 45, 85, 0.4);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
 }
 
 .primary-btn:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 30px -5px rgba(255, 45, 85, 0.5);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.6), 0 0 10px rgba(255, 0, 255, 0.4);
     color: var(--white);
 }
 
@@ -289,11 +306,11 @@ h1, h2, h3 {
 
 .resume-btn {
     background: var(--gradient-accent);
-    box-shadow: 0 10px 20px -5px rgba(88, 86, 214, 0.4);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
 }
 
 .resume-btn:hover {
-    box-shadow: 0 15px 30px -5px rgba(88, 86, 214, 0.5);
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.6), 0 0 10px rgba(0, 243, 255, 0.4);
 }
 
 .hero-image img {
@@ -302,13 +319,15 @@ h1, h2, h3 {
     object-fit: cover;
     border-radius: 50%;
     z-index: 2;
-    box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25);
-    border: 12px solid rgba(255,255,255,0.8);
+    box-shadow: 0 0 40px rgba(0, 243, 255, 0.5), inset 0 0 20px rgba(0, 243, 255, 0.5);
+    border: 4px solid var(--primary-color);
     transition: var(--transition);
 }
 
 .hero-image img:hover {
     transform: rotate(2deg) scale(1.05);
+    box-shadow: 0 0 60px rgba(255, 0, 255, 0.6), inset 0 0 30px rgba(255, 0, 255, 0.6);
+    border-color: var(--secondary-color);
 }
 
 .hero-image {
@@ -421,8 +440,10 @@ h1, h2, h3 {
 }
 
 .skill-tags span:hover {
-    background: var(--primary-color);
-    color: white;
+    background: rgba(0, 243, 255, 0.1);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
 }
 
 /* Projects Section */
@@ -439,7 +460,7 @@ h1, h2, h3 {
 
 .project-card:hover {
     transform: translateY(-15px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
     border-color: var(--primary-color);
 }
 
@@ -475,6 +496,36 @@ h1, h2, h3 {
 
 .project-content {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
+.project-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.view-project {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.project-card:hover .view-project {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
 }
 
 .project-content h3 {
@@ -554,7 +605,7 @@ h1, h2, h3 {
     top: 20px;
     width: 40px;
     height: 40px;
-    background: #111;
+    background: #000;
     border: 2px solid var(--primary-color);
     border-radius: 50%;
     display: flex;
@@ -562,6 +613,7 @@ h1, h2, h3 {
     align-items: center;
     color: var(--primary-color);
     z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
 }
 
 .timeline-content h3 {
@@ -582,6 +634,54 @@ h1, h2, h3 {
 
 .timeline-content p {
     color: var(--light-text);
+}
+
+/* Horizontal Education Layout */
+#education .timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#education .timeline::before {
+    display: none;
+}
+
+#education .timeline-item {
+    margin-left: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    height: 100%;
+}
+
+#education .timeline-icon {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-bottom: 1.5rem;
+    transform: none;
+}
+
+#education .timeline-content {
+    width: 100%;
+}
+
+#education .timeline-date {
+    float: none !important;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+#education .timeline-company {
+    display: block;
+    margin: 0.5rem auto 1rem;
+    width: fit-content;
 }
 
 /* Experience List Additions */
@@ -669,8 +769,9 @@ h1, h2, h3 {
 
 .contact-item:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 243, 255, 0.1);
     border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
 }
 
 .icon-box {
@@ -722,7 +823,7 @@ footer {
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(255, 45, 85, 0.3);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
@@ -739,7 +840,7 @@ footer {
 
 .scroll-to-top:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(255, 45, 85, 0.4);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
 }
 
 /* Interactive Experience Styles */
@@ -768,6 +869,22 @@ footer {
 .fade-in.appear {
     opacity: 1;
     transform: translateY(0);
+}
+
+@keyframes titleAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes textShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
 }
 
 /* Responsive Design */
